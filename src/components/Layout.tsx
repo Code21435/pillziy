@@ -2,65 +2,120 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { HeartPulse } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/#mission", label: "Mission" },
-    { href: "/#contact-us", label: "Contact Us" },
+    { href: "/mission", label: "Mission" },
   ];
 
   return (
-    <div className="min-h-screen bg-background flex flex-col font-sans">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
-        <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2 group cursor-pointer">
-            <div className="relative h-10 w-40 sm:h-12 sm:w-48">
-              <Image
-                src="/logo/Logo.PNG"
-                alt="PILLziy Logo"
-                fill
-                className="object-contain object-left"
-                priority
-              />
+    <div className="min-h-screen bg-background flex flex-col font-sans overflow-x-hidden">
+      <header className="fixed top-0 left-0 right-0 z-50 w-full border-b bg-white/95 backdrop-blur-md shadow-sm">
+        <div className="site-container h-20 flex items-center justify-between">
+          <div className="w-full flex items-center justify-between">
+            <Link href="/" className="flex items-center group">
+              <div className="relative flex-shrink-0">
+                <Image
+                  src="/logo/Logo.PNG"
+                  alt="ILLziy"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <span className="text-sm font-bold text-[#1E293B] -ml-1.5 leading-none pt-6">
+                ILLziy
+              </span>
+            </Link>
+
+            <nav className="hidden md:flex items-center gap-4 lg:gap-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={`text-sm font-medium transition-colors whitespace-nowrap ${
+                    pathname === link.href
+                      ? "text-[#EF4444] font-semibold"
+                      : "text-slate-600 hover:text-primary"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link href="/contact-us">
+                <Button className={`font-bold rounded-full px-6 lg:px-8 transition-colors ${
+                  pathname === "/contact-us"
+                    ? "bg-[#DC2626] hover:bg-[#B91C1C]"
+                    : "bg-[#EF4444] hover:bg-[#DC2626]"
+                } text-white`}>
+                  Contact Us
+                </Button>
+              </Link>
+            </nav>
+
+            <div className="md:hidden flex items-center gap-2">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+                aria-label="Toggle menu"
+              >
+                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
             </div>
-          </Link>
-
-          <nav className="hidden md:flex items-center gap-4 lg:gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-slate-600 hover:text-primary transition-colors whitespace-nowrap"
-              >
-                {link.label}
-              </a>
-            ))}
-            <Button variant="ghost" className="text-red-500 font-bold hover:text-red-600">
-              Login
-            </Button>
-            <Link href="/#contact-us">
-              <Button
-                className="font-bold rounded-full bg-primary hover:bg-primary/90 text-white px-6 lg:px-8"
-              >
-                Get App
-              </Button>
-            </Link>
-          </nav>
-
-          {/* Mobile Menu Placeholder - kept simple for this MVP */}
-          <div className="md:hidden">
-            <Link href="/#contact-us">
-              <Button size="sm">Demo</Button>
-            </Link>
           </div>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        {isMenuOpen && (
+          <>
+            <div
+              className="md:hidden fixed inset-0 bg-black/20 z-30"
+              onClick={() => setIsMenuOpen(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="md:hidden fixed top-20 left-0 right-0 bg-white/95 backdrop-blur-md border-b shadow-lg z-40"
+            >
+              <div className="site-container py-4">
+                <nav className="flex flex-col space-y-4">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`text-base font-medium transition-colors ${
+                        pathname === link.href
+                          ? "text-[#EF4444] font-semibold"
+                          : "text-slate-600 hover:text-primary"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                  <Link href="/contact-us" onClick={() => setIsMenuOpen(false)}>
+                    <Button className="w-full font-bold rounded-full bg-[#EF4444] hover:bg-[#DC2626] text-white">
+                      Contact Us
+                    </Button>
+                  </Link>
+                </nav>
+              </div>
+            </motion.div>
+          </>
+        )}
       </header>
 
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-hidden pt-20">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -70,51 +125,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </motion.div>
       </main>
 
-      <footer className="border-t bg-slate-50 py-8 sm:py-10 md:py-12">
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-          <div className="space-y-4">
-            <div className="relative h-8 w-32 sm:h-10 sm:w-40">
-              <Image
-                src="/logo/Logo.PNG"
-                alt="PILLziy Logo"
-                fill
-                className="object-contain object-left"
-              />
-            </div>
-            <p className="text-sm text-slate-500 max-w-xs">
-              Revolutionizing healthcare adherence through intelligent, patient-centric technology.
-            </p>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider text-slate-900">Company</h4>
-            <ul className="space-y-2 text-sm text-slate-600">
-              <li><a href="/#mission" className="hover:text-primary">Mission</a></li>
-              <li><a href="/#contact-us" className="hover:text-primary">Contact Us</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider text-slate-900">Legal</h4>
-            <ul className="space-y-2 text-sm text-slate-600">
-              <li><span className="cursor-pointer hover:text-primary">Privacy Policy</span></li>
-              <li><span className="cursor-pointer hover:text-primary">Terms of Service</span></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-semibold mb-4 text-sm uppercase tracking-wider text-slate-900">Contact</h4>
-            <div className="text-sm text-slate-600 space-y-2">
-              <p>hello@pillziy.health</p>
-              <p>+1 (555) 123-4567</p>
-              <p>San Francisco, CA</p>
-            </div>
-          </div>
-        </div>
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 max-w-7xl mt-8 sm:mt-10 md:mt-12 pt-6 sm:pt-8 border-t border-slate-200 text-center text-xs sm:text-sm text-slate-400">
-          © {new Date().getFullYear()} PILLziy Inc. All rights reserved.
-        </div>
-      </footer>
     </div>
   );
 }

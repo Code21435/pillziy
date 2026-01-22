@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
@@ -8,82 +8,53 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, CheckCircle2, Play, Building2, User2, Mail, Phone, Stethoscope } from "lucide-react";
+import { ArrowRight, CheckCircle2, Play, Building2, User2, Mail, Phone, Stethoscope, Volume2, VolumeX } from "lucide-react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 // --- Components for sections ---
 
 function HeroSection() {
-  const [isJoined, setIsJoined] = useState(false);
-  const form = useForm({
-    defaultValues: { email: "" },
-  });
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  const onSubmit = (data: { email: string }) => {
-    console.log("Early Access Email:", data.email);
-    setIsJoined(true);
-    form.reset();
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
   };
 
   return (
-    <section className="relative overflow-hidden min-h-screen flex items-center py-8 sm:py-12 lg:py-16 bg-red-50/30">
+    <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center bg-red-50/30">
       {/* Background Wave Aesthetic from Image */}
       <div className="absolute top-0 right-0 -z-10 w-full h-full overflow-hidden">
         <div className="absolute top-0 right-0 w-[80%] md:w-[60%] h-[120%] bg-white rounded-l-[10rem] md:rounded-l-[20rem] translate-x-1/4 -translate-y-1/4" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-10 max-w-7xl relative w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-20 items-center">
+      <div className="site-container relative w-full overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-12 items-center">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center rounded-full border border-red-100 bg-red-50 px-3 py-1 text-sm font-medium text-red-600 mb-6">
-              <span className="flex h-2 w-2 rounded-full bg-red-600 mr-2 animate-pulse"></span>
-              Coming Soon
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold tracking-tight text-[#1E293B] leading-[1.1] mb-4 sm:mb-6">
-              Save time.<br />
-              Healthcare online
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-display font-bold tracking-tight text-[#1E293B] leading-[1.1] mb-4 sm:mb-6">
+              Understand your prescription<br />
+              in 10 seconds
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-600 mb-6 sm:mb-8 max-w-xl leading-relaxed">
-              Now you do not need to download thousands of applications when there is one
+            <p className="text-base sm:text-lg text-slate-600 mb-4 sm:mb-6 max-w-xl leading-relaxed">
+              Scan your prescription in the PILLziy app. PILLziy generates a talking 3D pill and body animation, using AI to deliver clear, personalized medication guidance across languages and literacy levels.
             </p>
 
-            <div className="bg-white p-1.5 rounded-2xl sm:rounded-full shadow-xl shadow-red-100/50 border border-slate-100 max-w-md flex flex-col sm:flex-row items-center w-full">
-              {isJoined ? (
-                <div className="h-14 flex items-center px-6 text-green-600 font-medium">
-                  <CheckCircle2 className="w-5 h-5 mr-2" /> Thanks for joining!
-                </div>
-              ) : (
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col sm:flex-row w-full gap-2 sm:gap-0">
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem className="flex-1 mb-0 space-y-0">
-                          <FormControl>
-                            <Input
-                              type="email"
-                              required
-                              placeholder="Enter your email"
-                              className="border-0 shadow-none focus-visible:ring-0 pl-4 sm:pl-6 h-12 sm:h-14 bg-transparent text-sm sm:text-base rounded-full"
-                              {...field}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="h-12 sm:h-14 px-6 sm:px-10 rounded-full font-bold bg-[#F63049] hover:bg-[#F63049]/90 text-white transition-all text-base sm:text-lg w-full sm:w-auto"
-                    >
-                      Get Started
-                    </Button>
-                  </form>
-                </Form>
-              )}
+            <div className="flex flex-col sm:flex-row gap-4 max-w-md">
+              <Link href="/contact-us">
+                <Button className="h-12 sm:h-14 px-6 sm:px-8 rounded-full font-bold bg-[#F63049] hover:bg-[#F63049]/90 text-white transition-all text-base sm:text-lg w-full sm:w-auto">
+                  Join Early Access
+                </Button>
+              </Link>
+              <Link href="/contact-us">
+                <Button variant="outline" className="h-12 sm:h-14 px-6 sm:px-8 rounded-full font-bold border-[#F63049] text-[#F63049] hover:bg-[#F63049] hover:text-white transition-all text-base sm:text-lg w-full sm:w-auto">
+                  Request Demo
+                </Button>
+              </Link>
             </div>
           </div>
 
@@ -91,24 +62,31 @@ function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="relative flex justify-center mt-8 sm:mt-10 lg:mt-0"
+            className="relative flex justify-center mt-4 sm:mt-6 lg:mt-0"
           >
             {/* App UI Simulation from Image */}
-            <div className="relative w-full max-w-[300px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[450px]">
+            <div className="relative w-full max-w-[300px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[350px]">
               <div className="aspect-[3/4] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-white shadow-2xl shadow-red-200/50 border-[6px] sm:border-[8px] md:border-[12px] border-white relative group">
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F8FAFC]">
                   {/* Doctor Card UI */}
                   <div className="relative w-full h-full flex flex-col">
-                    <div className="flex-1 bg-white flex items-center justify-center overflow-hidden p-4">
+                    <div className="flex-1 bg-white flex items-center justify-center overflow-hidden p-4 relative">
                       <video
+                        ref={videoRef}
                         className="w-full h-full object-contain"
                         autoPlay
                         loop
-                        muted
+                        muted={isMuted}
                         playsInline
                       >
                         <source src="/video/Demo_Video.mp4" type="video/mp4" />
                       </video>
+                      <button
+                        onClick={toggleMute}
+                        className="absolute top-2 right-2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                      >
+                        {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                      </button>
                     </div>
                     <div className="p-3 sm:p-4 md:p-6 bg-white space-y-2 sm:space-y-3 md:space-y-4">
                       <div className="flex items-center justify-between">
@@ -134,13 +112,7 @@ function HeroSection() {
               </div>
 
               {/* Floatings cards */}
-              <div className="hidden sm:block absolute -left-8 sm:-left-12 bottom-16 sm:bottom-20 bg-white p-3 sm:p-4 rounded-2xl sm:rounded-3xl shadow-xl border border-slate-50 w-24 sm:w-32">
-                <p className="text-[10px] sm:text-xs text-slate-400 mb-1">Online queue</p>
-                <p className="text-xl sm:text-2xl font-bold text-slate-900">48</p>
-                <div className="mt-1.5 sm:mt-2 h-6 sm:h-8 w-full bg-red-50 rounded-lg overflow-hidden flex items-end">
-                  <div className="h-1/2 w-full bg-red-400" />
-                </div>
-              </div>
+              
             </div>
           </motion.div>
         </div>
@@ -157,8 +129,8 @@ function MissionSection() {
   ];
 
   return (
-    <section id="mission" className="py-16 md:py-20 bg-slate-50 border-y border-slate-100">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
+    <section id="mission" className="py-8 md:py-12 bg-slate-50 border-y border-slate-100">
+      <div className="site-container overflow-hidden">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl lg:text-4xl font-display font-bold text-slate-900 mb-6">
             Our Mission
@@ -202,7 +174,6 @@ function DemoSection() {
   });
 
   const onSubmit = (data: any) => {
-    console.log("Demo Request Data:", data);
     setIsSubmitted(true);
     form.reset();
   };
@@ -212,8 +183,8 @@ function DemoSection() {
   ];
 
   return (
-    <section id="contact-us" className="py-16 md:py-20 bg-white relative overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
+    <section id="contact-us" className="py-8 md:py-12 bg-white relative overflow-hidden">
+      <div className="site-container overflow-hidden">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div className="lg:sticky lg:top-32">
             <h2 className="text-4xl font-display font-bold text-slate-900 mb-6">
@@ -382,8 +353,6 @@ export default function Home() {
   return (
     <Layout>
       <HeroSection />
-      <MissionSection />
-      <DemoSection />
     </Layout>
   );
 }
