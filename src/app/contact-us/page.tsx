@@ -50,12 +50,12 @@ export default function ContactUs() {
   return (
     <Layout>
       {/* Main Content */}
-      <section className="py-6 md:py-8">
+      <section className="py-4 md:py-6">
         <div className="site-container">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start">
             {/* Left Side */}
             <div className="lg:sticky lg:top-24">
-              <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+              <h1 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
                 Experience PILLziy
               </h1>
               <p className="text-lg text-slate-600 mb-8 leading-relaxed">
@@ -79,7 +79,7 @@ export default function ContactUs() {
             </div>
 
             {/* Right Side - Form */}
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 lg:p-8">
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-4 lg:p-6">
               {isSubmitted ? (
                 <div className="text-center py-8">
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -91,7 +91,7 @@ export default function ContactUs() {
               ) : (
                 <>
                   <h2 className="text-2xl font-bold text-slate-900 mb-6">Contact Us</h2>
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} className="space-y-3">
                     {/* Organization Name */}
                     <div>
                       <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -101,7 +101,7 @@ export default function ContactUs() {
                         <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                         <Input
                           required
-                          className="pl-10 h-12 bg-[#FAFAFA] border-gray-200"
+                          className="pl-10 h-10 bg-[#FAFAFA] border-gray-200"
                           placeholder="Acme Health"
                           value={formData.orgName}
                           onChange={(e) => handleChange('orgName', e.target.value)}
@@ -119,7 +119,7 @@ export default function ContactUs() {
                           <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                           <Input
                             required
-                            className="pl-10 h-12 bg-[#FAFAFA] border-gray-200"
+                            className="pl-10 h-10 bg-[#FAFAFA] border-gray-200"
                             placeholder="John Doe"
                             value={formData.fullName}
                             onChange={(e) => handleChange('fullName', e.target.value)}
@@ -133,7 +133,7 @@ export default function ContactUs() {
                         </label>
                         <Input
                           required
-                          className="h-12 bg-[#FAFAFA] border-gray-200"
+                          className="h-10 bg-[#FAFAFA] border-gray-200"
                           placeholder="Clinical Director"
                           value={formData.role}
                           onChange={(e) => handleChange('role', e.target.value)}
@@ -152,7 +152,7 @@ export default function ContactUs() {
                           <Input
                             type="email"
                             required
-                            className="pl-10 h-12 bg-[#FAFAFA] border-gray-200"
+                            className="pl-10 h-10 bg-[#FAFAFA] border-gray-200"
                             placeholder="john@company.com"
                             value={formData.workEmail}
                             onChange={(e) => handleChange('workEmail', e.target.value)}
@@ -168,7 +168,7 @@ export default function ContactUs() {
                           <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
                           <Input
                             required
-                            className="pl-10 h-12 bg-[#FAFAFA] border-gray-200"
+                            className="pl-10 h-10 bg-[#FAFAFA] border-gray-200"
                             placeholder="(000) 000-0000"
                             value={formData.phone}
                             onChange={(e) => handleChange('phone', e.target.value)}
@@ -182,11 +182,11 @@ export default function ContactUs() {
                       <label className="block text-sm font-medium text-slate-700 mb-2">
                         Organization Type
                       </label>
-                      <Select 
-                        value={formData.orgType} 
+                      <Select
+                        value={formData.orgType}
                         onValueChange={(value) => handleChange('orgType', value)}
                       >
-                        <SelectTrigger className="h-12 bg-[#FAFAFA] border-gray-200">
+                        <SelectTrigger className="h-10 bg-[#FAFAFA] border-gray-200">
                           <SelectValue placeholder="Select organization type" />
                         </SelectTrigger>
                         <SelectContent>
@@ -202,7 +202,7 @@ export default function ContactUs() {
                     {/* Submit Button */}
                     <Button
                       type="submit"
-                      className="w-full h-12 text-base font-semibold bg-red-600 hover:bg-red-700"
+                      className="w-full h-10 text-base font-semibold bg-red-600 hover:bg-red-700"
                     >
                       Submit
                       <ArrowRight className="ml-2 h-4 w-4" />

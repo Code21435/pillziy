@@ -12,8 +12,7 @@ import { ArrowRight, CheckCircle2, Play, Building2, User2, Mail, Phone, Stethosc
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-// --- Components for sections ---
-
+// --- Hero Section ---
 function HeroSection() {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -26,33 +25,32 @@ function HeroSection() {
   };
 
   return (
-    <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center bg-red-50/30">
-      {/* Background Wave Aesthetic from Image */}
-      <div className="absolute top-0 right-0 -z-10 w-full h-full overflow-hidden">
-        <div className="absolute top-0 right-0 w-[80%] md:w-[60%] h-[120%] bg-white rounded-l-[10rem] md:rounded-l-[20rem] translate-x-1/4 -translate-y-1/4" />
-      </div>
+    <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center bg-gradient-to-br from-rose-50 via-white to-blue-50 pt-6 sm:pt-8 md:pt-0">
+      {/* Background Decorative Elements */}
+      <div className="absolute top-20 right-10 w-72 h-72 bg-red-100 rounded-full blur-3xl opacity-30"></div>
+      <div className="absolute bottom-20 left-10 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20"></div>
 
       <div className="site-container relative w-full overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-12 items-center">
-          <div className="max-w-2xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-6xl font-display font-bold tracking-tight text-[#1E293B] leading-[1.1] mb-4 sm:mb-6">
+          <div className="max-w-2xl z-10">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tight text-slate-900 leading-[1.1] mb-6">
               Understand your prescription<br />
-              in 10 seconds
+              <span className="text-red-600">in 10 seconds</span>
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-600 mb-4 sm:mb-6 max-w-xl leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-xl leading-relaxed">
               Scan your prescription in the PILLziy app. PILLziy generates a talking 3D pill and body animation, using AI to deliver clear, personalized medication guidance across languages and literacy levels.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link href="/contact-us">
-                <Button className="h-12 sm:h-14 px-6 sm:px-8 rounded-full font-bold bg-[#F63049] hover:bg-[#F63049]/90 text-white transition-all text-base sm:text-lg w-full sm:w-auto">
+                <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transition-all">
                   Join Early Access
                 </Button>
               </Link>
               <Link href="/contact-us">
-                <Button variant="outline" className="h-12 sm:h-14 px-6 sm:px-8 rounded-full font-bold border-[#F63049] text-[#F63049] hover:bg-[#F63049] hover:text-white transition-all text-base sm:text-lg w-full sm:w-auto">
-                  Request Demo
+                <Button variant="outline" className="border-2 border-slate-300 hover:border-red-600 hover:text-red-600 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-lg sm:rounded-xl transition-all">
+                  Request a Demo
                 </Button>
               </Link>
             </div>
@@ -62,13 +60,14 @@ function HeroSection() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="relative flex justify-center mt-4 sm:mt-6 lg:mt-0"
+            className="relative flex justify-center lg:justify-end mt-4 sm:mt-6 lg:mt-0"
           >
-            {/* App UI Simulation from Image */}
             <div className="relative w-full max-w-[300px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[350px]">
+              {/* Glow effect behind */}
+              <div className="absolute inset-0 bg-gradient-to-br from-red-400 to-orange-300 rounded-full blur-3xl opacity-20 scale-110"></div>
+
               <div className="aspect-[3/4] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-white shadow-2xl shadow-red-200/50 border-[6px] sm:border-[8px] md:border-[12px] border-white relative group">
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#F8FAFC]">
-                  {/* Doctor Card UI */}
                   <div className="relative w-full h-full flex flex-col">
                     <div className="flex-1 bg-white flex items-center justify-center overflow-hidden p-4 relative">
                       <video
@@ -110,9 +109,6 @@ function HeroSection() {
                   </div>
                 </div>
               </div>
-
-              {/* Floatings cards */}
-              
             </div>
           </motion.div>
         </div>
@@ -121,6 +117,145 @@ function HeroSection() {
   );
 }
 
+// --- Feature Section 1: Scan and Identify ---
+function ScanIdentifySection() {
+  return (
+    <section className="py-12 md:py-16 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Content */}
+          <div className="space-y-6">
+            <div className="inline-block">
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
+                Scan and identify<br />your meds
+              </h2>
+              <div className="h-1 w-24 bg-red-600 rounded-full"></div>
+            </div>
+
+            <p className="text-lg text-slate-600 leading-relaxed max-w-lg">
+              Simply scan your prescription with your phone camera. Our AI instantly recognizes and identifies all your medications, creating a personalized digital health profile in seconds.
+            </p>
+          </div>
+
+          {/* Right Phone Mockup */}
+          <div className="relative flex justify-center lg:justify-end">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-400 rounded-[3rem] blur-2xl opacity-10 scale-105"></div>
+              <img
+                src="/mission-image/Scan.png"
+                alt="Medication scanning interface"
+                className="relative w-full max-w-[150px] sm:max-w-[200px] md:max-w-[280px] h-auto drop-shadow-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// --- Feature Section 2: Take Right Dose ---
+function TakeRightDoseSection() {
+  return (
+    <section className="py-12 md:py-16 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-red-50 rounded-full blur-3xl opacity-30"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Phone Mockup */}
+          <div className="relative flex justify-center lg:justify-start order-2 lg:order-1">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-red-400 to-pink-400 rounded-[3rem] blur-2xl opacity-10 scale-105"></div>
+              <img
+                src="/mission-image/capsule.png"
+                alt="Medication reminder interface"
+                className="relative w-full max-w-[150px] sm:max-w-[200px] md:max-w-[280px] h-auto drop-shadow-2xl"
+              />
+            </div>
+          </div>
+
+          {/* Right Content */}
+          <div className="space-y-6 order-1 lg:order-2">
+            <div className="inline-block">
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
+                Take the right dose,<br />on time
+              </h2>
+              <div className="h-1 w-24 bg-red-600 rounded-full"></div>
+            </div>
+
+            <p className="text-lg text-slate-600 leading-relaxed max-w-lg">
+              Never miss a dose again. Get smart reminders with your friendly pill companion guiding you through each medication. Track your adherence and build healthy habits effortlessly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// --- Feature Section 3: See How It Helps ---
+function SeeHowItHelpsSection() {
+  return (
+    <section className="py-12 md:py-16 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Content */}
+          <div className="space-y-6">
+            <div className="inline-block">
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
+                See how it helps<br />your body
+              </h2>
+              <div className="h-1 w-24 bg-red-600 rounded-full"></div>
+            </div>
+
+            <p className="text-lg text-slate-600 leading-relaxed max-w-lg">
+              Visualize exactly how your medication works inside your body with interactive 3D animations. Understand the science in a way that's clear, engaging, and empowering.
+            </p>
+          </div>
+
+          {/* Right Phone Mockup */}
+          <div className="relative flex justify-center lg:justify-end">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-teal-400 rounded-[3rem] blur-2xl opacity-10 scale-105"></div>
+              <img
+                src="/mission-image/Learn.png"
+                alt="Body visualization interface"
+                className="relative w-full max-w-[150px] sm:max-w-[200px] md:max-w-[280px] h-auto drop-shadow-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// --- CTA Section ---
+function CTASection() {
+  // return (
+  //   <section className="py-24 bg-gradient-to-br from-red-600 to-red-700 relative overflow-hidden">
+  //     <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyem0wLTZWMzBIMjR2LTJoMTJ6bTAtNnYySDI0di0yaDE2em0wLTZ2MkgyNHYtMmgxMnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30"></div>
+
+  //     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+  //       <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+  //         Ready to transform your medication experience?
+  //       </h2>
+  //       <p className="text-xl text-red-100 mb-10 max-w-2xl mx-auto">
+  //         Join thousands of patients who are taking control of their health with PILLziy.
+  //       </p>
+  //       <Link href="/contact-us">
+  //         <Button className="bg-white text-red-600 hover:bg-red-50 px-10 py-7 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all font-semibold">
+  //           Get Started Today
+  //           <ArrowRight className="ml-2 h-5 w-5" />
+  //         </Button>
+  //       </Link>
+  //     </div>
+  //   </section>
+  // );
+}
+
+// --- Mission Section (Original) ---
 function MissionSection() {
   const features = [
     { title: "Smart Adherence", desc: "AI-driven reminders that patients actually listen to.", icon: CheckCircle2 },
@@ -160,6 +295,7 @@ function MissionSection() {
   );
 }
 
+// --- Demo Section (Original) ---
 function DemoSection() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const form = useForm({
@@ -349,10 +485,14 @@ function DemoSection() {
   );
 }
 
+// --- Main Component ---
 export default function Home() {
   return (
     <Layout>
       <HeroSection />
+      <ScanIdentifySection />
+      <TakeRightDoseSection />
+      <SeeHowItHelpsSection />
     </Layout>
   );
 }
