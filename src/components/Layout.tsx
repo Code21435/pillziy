@@ -42,21 +42,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={`text-sm font-medium transition-colors whitespace-nowrap ${
-                    pathname === link.href
+                  className={`text-sm font-medium transition-colors whitespace-nowrap ${pathname === link.href
                       ? "text-[#EF4444] font-semibold"
                       : "text-slate-600 hover:text-primary"
-                  }`}
+                    }`}
                 >
                   {link.label}
                 </Link>
               ))}
               <Link href="/contact-us">
-                <Button className={`font-bold rounded-full px-6 lg:px-8 transition-colors ${
-                  pathname === "/contact-us"
+                <Button className={`font-bold rounded-full px-6 lg:px-8 transition-colors ${pathname === "/contact-us"
                     ? "bg-[#DC2626] hover:bg-[#B91C1C]"
                     : "bg-[#EF4444] hover:bg-[#DC2626]"
-                } text-white`}>
+                  } text-white`}>
                   Contact Us
                 </Button>
               </Link>
@@ -94,11 +92,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       key={link.label}
                       href={link.href}
                       onClick={() => setIsMenuOpen(false)}
-                      className={`text-base font-medium transition-colors ${
-                        pathname === link.href
+                      className={`text-base font-medium transition-colors ${pathname === link.href
                           ? "text-[#EF4444] font-semibold"
                           : "text-slate-600 hover:text-primary"
-                      }`}
+                        }`}
                     >
                       {link.label}
                     </Link>

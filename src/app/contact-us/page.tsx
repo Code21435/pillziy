@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowRight, CheckCircle, Building2, User, Mail, Phone } from "lucide-react";
+import { PhoneInput } from "@/components/ui/phone-input";
 
 export default function ContactUs() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -165,13 +166,12 @@ export default function ContactUs() {
                           Phone Number
                         </label>
                         <div className="relative">
-                          <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                          <Input
+                          {/* <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" /> */}
+                          <PhoneInput
                             required
-                            className="pl-10 h-10 bg-[#FAFAFA] border-gray-200"
                             placeholder="(000) 000-0000"
                             value={formData.phone}
-                            onChange={(e) => handleChange('phone', e.target.value)}
+                            onChange={(value) => handleChange('phone', value)}
                           />
                         </div>
                       </div>
@@ -202,7 +202,7 @@ export default function ContactUs() {
                     {/* Submit Button */}
                     <Button
                       type="submit"
-                      className="w-full h-10 text-base font-semibold bg-red-600 hover:bg-red-700"
+                      className="w-full h-10 text-base font-semibold bg-[#EF4444] hover:bg-[#DC2626] rounded-full"
                     >
                       Submit
                       <ArrowRight className="ml-2 h-4 w-4" />

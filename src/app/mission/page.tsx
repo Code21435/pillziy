@@ -23,7 +23,7 @@ export default function Mission() {
             </div>
 
             {/* Right iPhone Mockup */}
-            <div className="flex justify-end">
+            <div className="flex justify-center lg:justify-end">
               <div className="relative w-full max-w-[220px]">
                 <img
                   src="/mission-image/capsule.png"

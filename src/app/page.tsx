@@ -44,12 +44,12 @@ function HeroSection() {
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link href="/contact-us">
-                <Button className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transition-all">
+                <Button className="bg-[#EF4444] hover:bg-[#DC2626] text-white px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-full shadow-lg hover:shadow-xl transition-all">
                   Join Early Access
                 </Button>
               </Link>
               <Link href="/contact-us">
-                <Button variant="outline" className="border-2 border-slate-300 hover:border-red-600 hover:text-red-600 px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-lg sm:rounded-xl transition-all">
+                <Button variant="outline" className="border-2 border-slate-300 hover:border-[#EF4444] hover:text-[#EF4444] px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-full transition-all">
                   Request a Demo
                 </Button>
               </Link>
@@ -469,7 +469,7 @@ function DemoSection() {
 
                     <Button
                       type="submit"
-                      className="w-full h-12 text-base font-semibold mt-4 bg-[#F63049] hover:bg-[#F63049]/90"
+                      className="w-full h-12 text-base font-semibold mt-4 bg-[#EF4444] hover:bg-[#DC2626] rounded-full"
                     >
                       Schedule Demo
                       <ArrowRight className="ml-2 h-4 w-4" />
