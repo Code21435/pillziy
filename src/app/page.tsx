@@ -25,7 +25,7 @@ function HeroSection() {
   };
 
   return (
-    <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center bg-gradient-to-br from-rose-50 via-white to-blue-50 pt-6 sm:pt-8 md:pt-0">
+    <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center bg-gradient-to-br from-rose-50 via-white to-blue-50 pt-16 sm:pt-20 md:pt-0">
       {/* Background Decorative Elements */}
       <div className="absolute top-20 right-10 w-72 h-72 bg-red-100 rounded-full blur-3xl opacity-30"></div>
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-20"></div>
@@ -42,14 +42,14 @@ function HeroSection() {
               Scan your prescription in the PILLziy app. PILLziy generates a talking 3D pill and body animation, using AI to deliver clear, personalized medication guidance across languages and literacy levels.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link href="/contact-us">
-                <Button className="bg-[#EF4444] hover:bg-[#DC2626] text-white px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-full shadow-lg hover:shadow-xl transition-all">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
+              <Link href="/contact-us" className="w-full sm:w-auto">
+                <Button className="w-full sm:w-auto bg-[#DC2626] hover:bg-[#B91C1C] text-white px-6 py-2 sm:px-8 sm:py-3 text-lg font-bold rounded-full shadow-lg hover:shadow-xl transition-all">
                   Join Early Access
                 </Button>
               </Link>
-              <Link href="/contact-us">
-                <Button variant="outline" className="border-2 border-slate-300 hover:border-[#EF4444] hover:text-[#EF4444] px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-full transition-all">
+              <Link href="/contact-us" className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full sm:w-auto border-2 border-[#DC2626] text-[#DC2626] hover:bg-red-50 px-6 py-2 sm:px-8 sm:py-3 text-lg font-bold rounded-full transition-all bg-white mb-4 sm:mb-0">
                   Request a Demo
                 </Button>
               </Link>
